@@ -12,15 +12,17 @@ import ReservationCTA from './components/ReservationCTA.jsx';
 import Footer from './components/Footer.jsx';
 import BookingModal from './components/BookingModal.jsx';
 import { useReveal } from './hooks/useReveal.js';
+import { useI18n } from './i18n/I18nContext.jsx';
 
 export default function App() {
   const booking = useRef(null);
   const openBooking = () => booking.current?.open();
+  const { t } = useI18n();
   useReveal();
 
   return (
     <>
-      <a className="skip-link" href="#main">Skip to content</a>
+      <a className="skip-link" href="#main">{t.common.skip}</a>
       <Navbar onBook={openBooking} />
       <main id="main">
         <Hero onBook={openBooking} />

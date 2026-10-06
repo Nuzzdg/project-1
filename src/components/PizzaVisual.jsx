@@ -1,7 +1,9 @@
 import { useEffect, useRef } from 'react';
 import { IMAGES } from '../data.js';
+import { useI18n } from '../i18n/I18nContext.jsx';
 
 export default function PizzaVisual() {
+  const v = useI18n().t.visual;
   const section = useRef(null);
   const img = useRef(null);
 
@@ -33,13 +35,13 @@ export default function PizzaVisual() {
       <img ref={img} className="visual__img" src={IMAGES.pizzaVisual} alt="" loading="lazy" />
       <div className="visual__shade" aria-hidden="true" />
       <div className="container visual__inner">
-        <p className="visual__tag visual__tag--a" data-reveal>Neapolitan style</p>
+        <p className="visual__tag visual__tag--a" data-reveal>{v.tagA}</p>
         <h2 id="visual-title" className="visual__title" data-reveal="lines">
-          <span className="line"><span>Wood-fired.</span></span>
-          <span className="line"><span>Hand-stretched.</span></span>
-          <span className="line"><span><em>Seriously good.</em></span></span>
+          <span className="line"><span>{v.title[0]}</span></span>
+          <span className="line"><span>{v.title[1]}</span></span>
+          <span className="line"><span><em>{v.title[2]}</em></span></span>
         </h2>
-        <p className="visual__tag visual__tag--b" data-reveal>Made to order</p>
+        <p className="visual__tag visual__tag--b" data-reveal>{v.tagB}</p>
       </div>
     </section>
   );

@@ -1,11 +1,15 @@
 import { useEffect, useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import Logo from './Logo.jsx';
-import { NAV, SITE } from '../data.js';
+import LanguageSwitcher from './LanguageSwitcher.jsx';
+import { NAV_HREFS, SITE } from '../data.js';
+import { useI18n } from '../i18n/I18nContext.jsx';
 
 export default function Navbar({ onBook }) {
+  const { t } = useI18n();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const nav = NAV_HREFS.map((href, i) => ({ href, label: t.nav.links[i] }));
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -30,7 +34,7 @@ export default function Navbar({ onBook }) {
 
         <nav className="nav__links" aria-label="Main">
           <ul>
-            {NAV.map((item, i) => (
+            {nav.map((item, i) => (
               <li key={item.href}>
                 <a href={item.href}>
                   <span className="nav__num">0{i + 1}</span>
@@ -41,8 +45,10 @@ export default function Navbar({ onBook }) {
           </ul>
         </nav>
 
+        <LanguageSwitcher />
+
         <button type="button" className="nav__book" onClick={onBook}>
-          Book a table
+          {t.common.book}
         </button>
 
         <button
@@ -50,7 +56,7 @@ export default function Navbar({ onBook }) {
           className="nav__toggle"
           aria-expanded={open}
           aria-controls="mobile-menu"
-          aria-label={open ? 'Close menu' : 'Open menu'}
+          aria-label={open ? t.nav.close : t.nav.open}
           onClick={() => setOpen((v) => !v)}
         >
           {open ? <X size={26} strokeWidth={1.5} /> : <Menu size={26} strokeWidth={1.5} />}
@@ -60,7 +66,7 @@ export default function Navbar({ onBook }) {
       <div id="mobile-menu" className="mobile-menu" hidden={!open}>
         <nav aria-label="Mobile">
           <ol>
-            {NAV.map((item, i) => (
+            {nav.map((item, i) => (
               <li key={item.href} style={{ '--i': i }}>
                 <a href={item.href} onClick={close}>
                   <span className="mobile-menu__num">0{i + 1}</span>
@@ -79,12 +85,12 @@ export default function Navbar({ onBook }) {
               onBook();
             }}
           >
-            <span className="btn__label">Book a table</span>
+            <span className="btn__label">{t.common.book}</span>
           </button>
           <p>
             {SITE.street}
             <br />
-            {SITE.postcode} · {SITE.hours}
+            {SITE.postcode} · {t.common.hours}
           </p>
         </div>
       </div>

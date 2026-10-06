@@ -10,7 +10,7 @@ function block(x, y) {
   return `${x + c},${y} ${x + s - c},${y} ${x + s},${y + c} ${x + s},${y + s - c} ${x + s - c},${y + s} ${x + c},${y + s} ${x},${y + s - c} ${x},${y + c}`;
 }
 
-export default function StylizedMap() {
+export default function StylizedMap({ label }) {
   const blocks = [];
   for (let r = -3; r < 12; r++) {
     for (let c = -3; c < 12; c++) {
@@ -19,7 +19,7 @@ export default function StylizedMap() {
   }
 
   return (
-    <svg className="map" viewBox="0 0 600 600" role="img" aria-label="Stylised map of the Eixample grid with Carrer de Trafalgar highlighted">
+    <svg className="map" viewBox="0 0 600 600" role="img" aria-label={label}>
       <rect width="600" height="600" className="map__ground" />
       <g transform="rotate(-44 300 300)">
         <g className="map__blocks">{blocks}</g>

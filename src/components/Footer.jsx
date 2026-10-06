@@ -1,6 +1,9 @@
 import { LINKS, SITE } from '../data.js';
+import { useI18n } from '../i18n/I18nContext.jsx';
 
 export default function Footer({ onBook }) {
+  const { t } = useI18n();
+  const f = t.footer;
   const year = new Date().getFullYear();
 
   return (
@@ -8,7 +11,7 @@ export default function Footer({ onBook }) {
       <div className="container">
         <div className="footer__top">
           <div className="footer__col">
-            <h2 className="footer__heading">Find us</h2>
+            <h2 className="footer__heading">{f.findUs}</h2>
             <address>
               {SITE.street}
               <br />
@@ -17,24 +20,24 @@ export default function Footer({ onBook }) {
           </div>
 
           <div className="footer__col">
-            <h2 className="footer__heading">Opening</h2>
-            <p className="footer__open">Open late</p>
-            <p>{SITE.hours}</p>
+            <h2 className="footer__heading">{f.opening}</h2>
+            <p className="footer__open">{f.openLate}</p>
+            <p>{t.common.hours}</p>
           </div>
 
           <nav className="footer__col" aria-label="Footer">
-            <h2 className="footer__heading">Explore</h2>
+            <h2 className="footer__heading">{f.explore}</h2>
             <ul className="footer__links">
-              <li><a href="#menu">Menu</a></li>
-              <li><button type="button" onClick={onBook}>Reservations</button></li>
-              <li><a href="#contact">Contact</a></li>
-              <li><a href={LINKS.directions} target="_blank" rel="noopener noreferrer">Directions</a></li>
+              <li><a href="#menu">{f.links.menu}</a></li>
+              <li><button type="button" onClick={onBook}>{f.links.reservations}</button></li>
+              <li><a href="#contact">{f.links.contact}</a></li>
+              <li><a href={LINKS.directions} target="_blank" rel="noopener noreferrer">{f.links.directions}</a></li>
               <li><a href={LINKS.instagram} target="_blank" rel="noopener noreferrer">Instagram</a></li>
             </ul>
           </nav>
 
           <div className="footer__col footer__note">
-            <p>Neapolitan pizza, cocktails and late nights in the heart of Barcelona. LGBTQ+ friendly, always.</p>
+            <p>{f.note}</p>
           </div>
         </div>
 
@@ -45,7 +48,7 @@ export default function Footer({ onBook }) {
         <div className="footer__bottom">
           <p>© {year} {SITE.name}</p>
           <p>Pizza Club · Barcelona</p>
-          <a href="#top">Back to top ↑</a>
+          <a href="#top">{f.backTop}</a>
         </div>
       </div>
     </footer>

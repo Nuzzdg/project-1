@@ -1,8 +1,11 @@
 import { useState } from 'react';
 import Button from './Button.jsx';
 import { MENU, LINKS } from '../data.js';
+import { useI18n } from '../i18n/I18nContext.jsx';
 
 export default function MenuSection() {
+  const { t } = useI18n();
+  const m = t.menu;
   const [tab, setTab] = useState(MENU[0].id);
   const [active, setActive] = useState(0);
   const category = MENU.find((c) => c.id === tab);
@@ -25,14 +28,14 @@ export default function MenuSection() {
       <div className="container">
         <header className="menu__head">
           <p className="label" data-reveal>
-            <span className="label__num">(02)</span> From the oven
+            <span className="label__num">(02)</span> {m.label}
           </p>
           <h2 id="menu-title" className="display menu__title" data-reveal="lines">
-            <span className="line"><span>The good</span></span>
-            <span className="line"><span><em>stuff.</em></span></span>
+            <span className="line"><span>{m.title[0]}</span></span>
+            <span className="line"><span><em>{m.title[1]}</em></span></span>
           </h2>
 
-          <div className="menu__tabs" role="tablist" aria-label="Menu categories" data-reveal>
+          <div className="menu__tabs" role="tablist" aria-label={m.tabsAria} data-reveal>
             {MENU.map((c, i) => (
               <button
                 key={c.id}
@@ -46,7 +49,7 @@ export default function MenuSection() {
                 onClick={() => selectTab(c.id)}
                 onKeyDown={(e) => onTabKey(e, i)}
               >
-                {c.label}
+                {m.tabs[c.id]}
                 <sup>{c.items.length}</sup>
               </button>
             ))}
@@ -57,7 +60,7 @@ export default function MenuSection() {
           <ol id="menu-panel" className="menu__list" role="tabpanel" aria-labelledby={`tab-${tab}`} key={tab}>
             {category.items.map((item, i) => (
               <li
-                key={item.name}
+                key={item.id}
                 className={`menu__item ${i === active ? 'is-active' : ''}`}
                 style={{ '--i': i }}
                 tabIndex={0}
@@ -66,8 +69,8 @@ export default function MenuSection() {
               >
                 <span className="menu__num">{String(i + 1).padStart(2, '0')}</span>
                 <div className="menu__text">
-                  <h3>{item.name}</h3>
-                  <p>{item.desc}</p>
+                  <h3>{m.items[item.id].name}</h3>
+                  <p>{m.items[item.id].desc}</p>
                 </div>
                 <img className="menu__thumb" src={item.img} alt="" loading="lazy" />
               </li>
@@ -78,25 +81,25 @@ export default function MenuSection() {
             <div className="menu__frame">
               {MENU.flatMap((c) => c.items).map((item) => (
                 <img
-                  key={item.name}
+                  key={item.id}
                   src={item.img}
                   alt=""
                   loading="lazy"
-                  className={item.name === current.name ? 'is-shown' : ''}
+                  className={item.id === current.id ? 'is-shown' : ''}
                 />
               ))}
             </div>
             <p className="menu__caption">
-              <span>{current.name}</span>
-              <span>Illustrative photo</span>
+              <span>{m.items[current.id].name}</span>
+              <span>{m.illustrative}</span>
             </p>
           </div>
         </div>
 
         <footer className="menu__foot">
-          <p>A selection of house favourites. Full menu, prices and allergens available at the restaurant.</p>
+          <p>{m.foot}</p>
           <Button href={LINKS.website} variant="line" external>
-            View full menu
+            {m.full}
           </Button>
         </footer>
       </div>

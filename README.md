@@ -29,11 +29,15 @@ public/favicon.svg
 src/
   main.jsx              Entry point
   App.jsx               Page layout: puts the sections in order
-  data.js               All content: images, menu, gallery, reviews, links
+  data.js               Images, menu structure, links, review quotes
+  i18n/
+    translations.js     All text in English, Spanish and Catalan
+    I18nContext.jsx     Language state, saved choice, page lang/title
   styles.css            All styles, organised by section
   hooks/useReveal.js    Scroll-triggered reveal animations
   components/
     Navbar.jsx          Sticky nav + fullscreen mobile menu
+    LanguageSwitcher.jsx  Globe + EN / ES / CA buttons
     Hero.jsx
     Marquee.jsx
     StorySection.jsx
@@ -49,9 +53,15 @@ src/
     Button.jsx, Logo.jsx
 ```
 
+## Languages
+
+The site is available in **English, Español and Català**, using the globe switcher in the navigation bar. The choice is saved in the browser. On a first visit the site uses the browser's language (falling back to English), and it updates the page `lang`, title and meta description.
+
+All visible text lives in [`src/i18n/translations.js`](src/i18n/translations.js), with one block per language. To change copy, edit it there for each language. Review quotes stay in their original English in every language.
+
 ## Editing content
 
-Text, images and links live in [`src/data.js`](src/data.js), so most edits don't touch the components.
+Images, links and facts live in [`src/data.js`](src/data.js); text lives in the translations file. Most edits don't touch the components.
 
 - **Images:** the photos are Unsplash placeholders. Some menu photos are illustrative rather than the actual dish. Replace the IDs/URLs in `IMAGES`, `MENU` and `GALLERY` with the restaurant's own photography.
 - **Instagram:** `LINKS.instagram` is a placeholder. Set it to the real profile.

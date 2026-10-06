@@ -1,10 +1,13 @@
-import { MARQUEE } from '../data.js';
+import { useI18n } from '../i18n/I18nContext.jsx';
 
 export default function Marquee({ variant = 'red', reverse = false }) {
+  const { t } = useI18n();
+  const words = t.marquee;
+
   // Content is repeated so the loop is seamless; only the first copy is read by screen readers.
   const group = (hidden) => (
     <ul className="marquee__group" aria-hidden={hidden || undefined}>
-      {[...MARQUEE, ...MARQUEE].map((word, i) => (
+      {[...words, ...words].map((word, i) => (
         <li key={i}>
           <span className={i % 3 === 1 ? 'is-italic' : ''}>{word}</span>
           <span className="marquee__sep" aria-hidden="true">✺</span>

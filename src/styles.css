@@ -509,6 +509,66 @@ a.btn[target='_blank']:hover .btn__icon {
   border-color: var(--tomato);
 }
 
+/* Language switcher: globe + EN / ES / CA */
+.lang {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.lang__icon {
+  flex: none;
+  margin-right: 4px;
+  opacity: 0.75;
+}
+
+.lang__btn {
+  position: relative;
+  min-width: 32px;
+  min-height: 44px;
+  padding: 0 4px;
+  border: 0;
+  background: none;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: rgba(242, 233, 218, 0.55);
+  transition: color 0.3s var(--ease);
+}
+
+.lang__btn + .lang__btn::before {
+  content: '';
+  position: absolute;
+  left: -1px;
+  top: 50%;
+  width: 1px;
+  height: 11px;
+  background: rgba(242, 233, 218, 0.25);
+  transform: translateY(-50%);
+}
+
+.lang__btn:hover {
+  color: var(--cream);
+}
+
+.lang__btn[aria-pressed='true'] {
+  color: var(--cream);
+}
+
+.lang__btn[aria-pressed='true']::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 9px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--tomato-hot);
+  transform: translateX(-50%);
+}
+
 .nav__toggle {
   display: none;
   position: relative;
@@ -586,7 +646,7 @@ a.btn[target='_blank']:hover .btn__icon {
   color: rgba(242, 233, 218, 0.72);
 }
 
-@media (max-width: 899px) {
+@media (max-width: 1179px) {
   .nav__links,
   .nav__book {
     display: none;
@@ -594,7 +654,14 @@ a.btn[target='_blank']:hover .btn__icon {
 
   .nav__toggle {
     display: grid;
+  }
+
+  .lang {
     margin-left: auto;
+  }
+
+  .nav__inner {
+    gap: 12px;
   }
 
   .nav__inner {
@@ -602,7 +669,7 @@ a.btn[target='_blank']:hover .btn__icon {
   }
 }
 
-@media (min-width: 900px) {
+@media (min-width: 1180px) {
   .mobile-menu {
     display: none !important;
   }
