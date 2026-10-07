@@ -94,6 +94,22 @@ export default function Navbar({ onBook }) {
           </p>
         </div>
       </div>
+
+      <div className="mobile-book-bar" aria-label="Quick book">
+        <div className="mobile-book-bar__tray">
+          <div className="mobile-book-bar__meta">
+            <span>{t.hero.stamp[0]} · {t.hero.stamp[1]}</span>
+            <strong>{t.common.book}</strong>
+          </div>
+          <button
+            type="button"
+            className="mobile-book-bar__button"
+            onClick={onBook}
+          >
+            {t.common.book}
+          </button>
+        </div>
+      </div>
     </header>
   );
 }
