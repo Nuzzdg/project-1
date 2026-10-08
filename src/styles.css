@@ -657,7 +657,7 @@ a.btn[target='_blank']:hover .btn__icon {
   background: linear-gradient(180deg, rgba(23, 19, 15, 0), rgba(23, 19, 15, 0.68) 18%, rgba(23, 19, 15, 0.96));
 }
 
-.nav--open .mobile-book-bar {
+.mobile-book-bar--hidden {
   display: none !important;
 }
 
@@ -699,7 +699,7 @@ a.btn[target='_blank']:hover .btn__icon {
 
 .mobile-book-bar__button {
   flex: none;
-  min-height: 46px;
+  min-height: 48px;
   padding: 0 18px;
   border: 1px solid transparent;
   border-radius: 12px;
@@ -709,6 +709,19 @@ a.btn[target='_blank']:hover .btn__icon {
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    background-color 0.2s var(--ease),
+    transform 0.2s var(--ease);
+}
+
+.mobile-book-bar__button:active {
+  background: var(--tomato-hot);
+  transform: scale(0.98);
+}
+
+.mobile-book-bar__button:focus-visible {
+  outline-offset: 3px;
 }
 
 @media (max-width: 1179px) {

@@ -28,74 +28,80 @@ export default function Navbar({ onBook }) {
   const close = () => setOpen(false);
 
   return (
-    <header className={`nav ${scrolled ? 'nav--scrolled' : ''} ${open ? 'nav--open' : ''}`}>
-      <div className="nav__inner container">
-        <Logo />
+    <>
+      <header className={`nav ${scrolled ? 'nav--scrolled' : ''} ${open ? 'nav--open' : ''}`}>
+        <div className="nav__inner container">
+          <Logo />
 
-        <nav className="nav__links" aria-label="Main">
-          <ul>
-            {nav.map((item, i) => (
-              <li key={item.href}>
-                <a href={item.href}>
-                  <span className="nav__num">0{i + 1}</span>
-                  {item.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
+          <nav className="nav__links" aria-label="Main">
+            <ul>
+              {nav.map((item, i) => (
+                <li key={item.href}>
+                  <a href={item.href}>
+                    <span className="nav__num">0{i + 1}</span>
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
 
-        <LanguageSwitcher />
+          <LanguageSwitcher />
 
-        <button type="button" className="nav__book" onClick={onBook}>
-          {t.common.book}
-        </button>
+          <button type="button" className="nav__book" onClick={onBook}>
+            {t.common.book}
+          </button>
 
-        <button
-          type="button"
-          className="nav__toggle"
-          aria-expanded={open}
-          aria-controls="mobile-menu"
-          aria-label={open ? t.nav.close : t.nav.open}
-          onClick={() => setOpen((v) => !v)}
-        >
-          {open ? <X size={26} strokeWidth={1.5} /> : <Menu size={26} strokeWidth={1.5} />}
-        </button>
-      </div>
-
-      <div id="mobile-menu" className="mobile-menu" hidden={!open}>
-        <nav aria-label="Mobile">
-          <ol>
-            {nav.map((item, i) => (
-              <li key={item.href} style={{ '--i': i }}>
-                <a href={item.href} onClick={close}>
-                  <span className="mobile-menu__num">0{i + 1}</span>
-                  {item.label}
-                </a>
-              </li>
-            ))}
-          </ol>
-        </nav>
-        <div className="mobile-menu__foot">
           <button
             type="button"
-            className="btn btn--cream"
-            onClick={() => {
-              close();
-              onBook();
-            }}
+            className="nav__toggle"
+            aria-expanded={open}
+            aria-controls="mobile-menu"
+            aria-label={open ? t.nav.close : t.nav.open}
+            onClick={() => setOpen((v) => !v)}
           >
-            <span className="btn__label">{t.common.book}</span>
+            {open ? <X size={26} strokeWidth={1.5} /> : <Menu size={26} strokeWidth={1.5} />}
           </button>
-          <p>
-            {SITE.street}
-            <br />
-            {SITE.postcode} · {t.common.hours}
-          </p>
         </div>
-      </div>
 
-      <div className="mobile-book-bar" aria-label="Quick book">
+        <div id="mobile-menu" className="mobile-menu" hidden={!open}>
+          <nav aria-label="Mobile">
+            <ol>
+              {nav.map((item, i) => (
+                <li key={item.href} style={{ '--i': i }}>
+                  <a href={item.href} onClick={close}>
+                    <span className="mobile-menu__num">0{i + 1}</span>
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </nav>
+          <div className="mobile-menu__foot">
+            <button
+              type="button"
+              className="btn btn--cream"
+              onClick={() => {
+                close();
+                onBook();
+              }}
+            >
+              <span className="btn__label">{t.common.book}</span>
+            </button>
+            <p>
+              {SITE.street}
+              <br />
+              {SITE.postcode} · {t.common.hours}
+            </p>
+          </div>
+        </div>
+      </header>
+
+      <div
+        className={`mobile-book-bar ${open ? 'mobile-book-bar--hidden' : ''}`}
+        role="group"
+        aria-label={t.common.book}
+      >
         <div className="mobile-book-bar__tray">
           <div className="mobile-book-bar__meta">
             <span>{t.hero.stamp[0]} · {t.hero.stamp[1]}</span>
@@ -110,6 +116,6 @@ export default function Navbar({ onBook }) {
           </button>
         </div>
       </div>
-    </header>
+    </>
   );
 }
