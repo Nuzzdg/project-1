@@ -15,6 +15,15 @@ npm run dev
 
 Then open http://localhost:5173.
 
+## Deploying to GitHub Pages
+
+Pushes to `main` build and deploy the site automatically with GitHub Actions. The
+site will be available at https://nuzzdg.github.io/project-1/ after the first
+successful deployment. In the repository's **Settings → Pages**, set the source
+to **GitHub Actions** if it is not already selected.
+
+The booking form is a frontend demo and does not submit real reservations.
+
 | Command           | What it does                         |
 | ----------------- | ------------------------------------ |
 | `npm run dev`     | Start the dev server with hot reload |
